@@ -19,6 +19,7 @@ namespace IMSKPISender
         private string _MQServerUri = "";
         private string _QueueName = "";
         private int _Interval = 1;
+        private int _KpiInterval = 5;
         private Timer _Timer;
         private DbProviderFactory _df;
 
@@ -47,6 +48,7 @@ namespace IMSKPISender
                 _MQServerUri = ConfigurationManager.AppSettings["MQServerUri"].Trim();
                 _QueueName = ConfigurationManager.AppSettings["QueueName"].Trim();
                 _Interval = int.Parse(ConfigurationManager.AppSettings["Interval"].Trim());
+                _KpiInterval = int.Parse(ConfigurationManager.AppSettings["KpiInterval"].Trim());
 
                 _Timer = new Timer() { Interval = _Interval, AutoReset = true, Enabled = true };
                 _Timer.Elapsed += new ElapsedEventHandler(SendKpi);
@@ -63,14 +65,14 @@ namespace IMSKPISender
 
         private DateTime Get5Minute0(DateTime t)
         {
-            decimal m0 = t.Minute / 5;
-            decimal m = System.Math.Ceiling(m0 / 5);
+            decimal m0 = t.Minute;
+            decimal m = System.Math.Ceiling(m0 / this._KpiInterval);
             return new DateTime(t.Year, t.Month, t.Day, t.Hour, (int)m, 0);
         }
         private DateTime Get5Minute1(DateTime t)
         {
-            decimal m0 = t.Minute / 5;
-            decimal m = System.Math.Floor(m0 / 5);
+            decimal m0 = t.Minute;
+            decimal m = System.Math.Floor(m0 / this._KpiInterval);
             return new DateTime(t.Year, t.Month, t.Day, t.Hour, (int)m, 0);
         }
 
