@@ -131,8 +131,6 @@ namespace IMSKPISender
 
         private void SendMessage(Dictionary<string, string> message)
         {
-            //Create the Connection Factory
-            //string msgKey, msgValue;
             using (IConnection connection = new ConnectionFactory(this._URI).CreateConnection())
             {
                 using (ISession session = connection.CreateSession())
