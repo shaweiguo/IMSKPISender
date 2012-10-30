@@ -32,7 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Apache.NMS">
+      <HintPath>..\..\..\Visual Studio 2012\Projects\IMSHelperV22\Server\NXXT.IMSHelper.Server\bin\Release\Apache.NMS.dll</HintPath>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ">
+      <HintPath>..\..\..\Visual Studio 2012\Projects\IMSHelperV22\Server\NXXT.IMSHelper.Server\bin\Release\Apache.NMS.ActiveMQ.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveMQSender.cs" />
     <Compile Include="IMSKPISender.cs">
       <SubType>Component</SubType>
     </Compile>
