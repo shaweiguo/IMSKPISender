@@ -22,6 +22,8 @@ namespace IMSKPISender
         private int _KpiInterval = 5;
         private Timer _Timer;
         private DbProviderFactory _df;
+        private const string _logName = "IMS KPI Sender";
+        private const string _eventSourceName = "IMSKPISender";
 
         public IMSKPISendService()
         {
@@ -37,7 +39,7 @@ namespace IMSKPISender
             }
             else
             {
-                Log("Init error.");
+                LogError("Init error.");
             }
         }
 
@@ -45,6 +47,12 @@ namespace IMSKPISender
         {
             try
             {
+                if (!EventLog.SourceExists(_eventSourceName))
+                {
+                    var eventSourceData = new EventSourceCreationData(_eventSourceName, _logName);
+                    EventLog.CreateEventSource(eventSourceData);
+                }
+
                 _DBConnStr = ConfigurationManager.AppSettings["DBConnStr"].Trim();
                 _MQServerUri = ConfigurationManager.AppSettings["MQServerUri"].Trim();
                 _QueueName = ConfigurationManager.AppSettings["QueueName"].Trim();
@@ -59,7 +67,7 @@ namespace IMSKPISender
             }
             catch(Exception ex)
             {
-                Log(ex.Message);
+                LogError(ex.Message);
                 return false;
             }
         }
@@ -118,13 +126,32 @@ namespace IMSKPISender
                 }
 
             }
-            catch
+            catch(Exception ex)
             {
+                LogError(ex.Message);
             }
         }
 
         private void Log(string msg)
         {
+            using (var log = new EventLog(_logName, ".", _eventSourceName))
+            {
+                log.WriteEntry(msg);
+            }
+        }
+        private void LogWarning(string msg)
+        {
+            using (var log = new EventLog(_logName, ".", _eventSourceName))
+            {
+                log.WriteEntry(msg,EventLogEntryType.Warning);
+            }
+        }
+        private void LogError(string msg)
+        {
+            using (var log = new EventLog(_logName, ".", _eventSourceName))
+            {
+                log.WriteEntry(msg,EventLogEntryType.Error);
+            }
         }
 
         protected override void OnStop()
