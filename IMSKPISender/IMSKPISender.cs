@@ -26,6 +26,7 @@ namespace IMSKPISender
         public IMSKPISendService()
         {
             InitializeComponent();
+            _df = DbProviderFactories.GetFactory("System.Data.SqlClient");
         }
 
         protected override void OnStart(string[] args)

@@ -33,10 +33,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Apache.NMS">
-      <HintPath>..\..\..\Visual Studio 2012\Projects\IMSHelperV22\Server\NXXT.IMSHelper.Server\bin\Release\Apache.NMS.dll</HintPath>
+      <HintPath>E:\Develop\Lib\Server\ActiveMQ\Apache.NMS.dll</HintPath>
     </Reference>
     <Reference Include="Apache.NMS.ActiveMQ">
-      <HintPath>..\..\..\Visual Studio 2012\Projects\IMSHelperV22\Server\NXXT.IMSHelper.Server\bin\Release\Apache.NMS.ActiveMQ.dll</HintPath>
+      <HintPath>E:\Develop\Lib\Server\ActiveMQ\Apache.NMS.ActiveMQ.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
