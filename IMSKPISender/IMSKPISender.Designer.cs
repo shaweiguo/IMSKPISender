@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            // 
+            // IMSKPISendService
+            // 
+            this.ServiceName = "IMS KPI Send Service";
+
         }
 
         #endregion

@@ -36,16 +36,38 @@ namespace IMSKPISender
             try
             {
                 message.Add("CLASSNAME", "BusinessSystem");
-
-                //需要发送指标所属的系统名称;
-                message.Add("MAINDATA", "Name=" + orgappname);
+                message.Add("MAINDATA", "Name=" + orgappname);//需要发送指标所属的系统名称;
 
                 message.Add(kpiname, kpivalue);
 
                 message.Add("TIME", String.Format("{0:yyyy-MM-dd HH:mm:ss}", System.DateTime.Now));
-
                 message.Add("SCENE", developername);
 
+                SendMessage(message);
+                message.Clear();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool SendOrgappKpis(Dictionary<string, string> kpis, string orgappname, string developername)
+        {
+            Dictionary<string, string> message = new Dictionary<string, string>();
+            try
+            {
+                message.Add("CLASSNAME", "BusinessSystem");
+                message.Add("MAINDATA", "Name=" + orgappname);//需要发送指标所属的系统名称;
+
+                foreach (KeyValuePair<string, string> item in kpis)
+                {
+                    message.Add(item.Key, item.Value);
+                }
+
+                message.Add("TIME", String.Format("{0:yyyy-MM-dd HH:mm:ss}", System.DateTime.Now));
+                message.Add("SCENE", developername);
                 SendMessage(message);
                 message.Clear();
                 return true;

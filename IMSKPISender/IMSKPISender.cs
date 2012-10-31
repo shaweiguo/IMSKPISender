@@ -22,8 +22,8 @@ namespace IMSKPISender
         private int _KpiInterval = 5;
         private Timer _Timer;
         private DbProviderFactory _df;
-        private const string _logName = "IMS KPI Sender";
-        private const string _eventSourceName = "IMSKPISender";
+        private const string _logName = "IMS KPI Send Service";
+        private const string _eventSourceName = "IMSKPISendService";
 
         public IMSKPISendService()
         {
@@ -35,7 +35,7 @@ namespace IMSKPISender
         {
             if (Init())
             {
-                Log("IMSKPISender Started!");
+                Log(_eventSourceName + " Started!");
             }
             else
             {
@@ -156,6 +156,7 @@ namespace IMSKPISender
 
         protected override void OnStop()
         {
+            Log(_eventSourceName + " Stoped!");
         }
     }
 }
